@@ -1,0 +1,66 @@
+import random
+
+def compare_number(number, user_guess):
+    cowbull = [0, 0, 0, 0]
+    for i in range(len(number)):
+        if number[i] == user_guess[i]:
+           cowbull[i] += 1
+    return cowbull
+
+
+if __name__ == "__main__":
+    playing = True
+    number = str(random.randint(1000, 10000))
+    guesses = 0
+
+    print("Let's Play A Game Of Cows And Bulls!")
+    print("I Will Generate A 4 Digit Number, And You Have To Guess The Numbers One Digit At A Time.")
+    print("For Every Number I The Wrong Place, You Get A Bull. For Every Number In The Right Place, You Get A Cow.")
+    print("The Game Will End When You Get 4 Bulls.")
+    print("Type Exit At Any Prompt To Exit!")
+
+while playing:
+    user_guess = input("Give Me The Best You Got!: ")
+    if user_guess.lower() == "exit":
+        break
+    cowbull_count = compare_number(number, user_guess)
+    guesses += 1
+    correct = sum(cowbull_count)
+    wrong = len(number) - correct
+    print(f"You Have {correct} Cows, And {wrong} Bulls.")
+
+    if correct == 4:
+        playing = False
+        print(f"You Win The Game After {guesses} Guess(es)!. The Number Was {number}.")
+        break
+    else:
+        print(f"Your Guess Isn't Quite Right, Try Again!.")
+        if correct >= 1:
+            print(str([user_guess[i] for i, x in enumerate(cowbull_count) if x == 1]) + " was correct!")
+              
+               */--------output-------*/
+
+Let's Play A Game Of Cows And Bulls!
+I Will Generate A 4 Digit Number, And You Have To Guess The Numbers One Digit At A Time.
+For Every Number I The Wrong Place, You Get A Bull. For Every Number In The Right Place, You Get A Cow.
+The Game Will End When You Get 4 Bulls.
+Type Exit At Any Prompt To Exit!
+number=4664
+give me the best you got!:0123
+you have 0 cows and 4 bulls.
+Your Guess Isn't Quite Right, Try Again!.
+give me the best you got!:4346
+you have 1cows and 3 bulls.
+Your Guess Isn't Quite Right, Try Again!.
+['4'] was correct!
+give me the best you got!:4636
+you have 2 cows and 2 bulls.
+Your Guess Isn't Quite Right, Try Again!
+['4','6'] was correct!.
+give me the best you got!:4663
+you have 3 cows and 1 bulls.
+Your Guess Isn't Quite Right, Try Again!.
+['4','6','6'] was correct!
+give me the best you got!:4664
+you have 4 cows and 0 bulls.
+You Win The Game After 5 Guess(es)!. The Number Was 4664.
